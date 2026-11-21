@@ -1,0 +1,39 @@
+{
+  "columns": {
+    "scans.tsv": [
+      "id",
+      "source",
+      "paper_type",
+      "fingerprint",
+      "candidates"
+    ],
+    "issue_ledger.tsv": [
+      "id",
+      "owner",
+      "reference",
+      "product",
+      "qty",
+      "unit"
+    ],
+    "physical.tsv": [
+      "id",
+      "paper",
+      "recorded_at",
+      "detail",
+      "state"
+    ],
+    "transfer_limits.tsv": [
+      "id",
+      "authority",
+      "text"
+    ]
+  },
+  "references": [
+    [
+      "physical.tsv",
+      "paper",
+      "scans.tsv"
+    ]
+  ],
+  "compound_keys": []
+}
