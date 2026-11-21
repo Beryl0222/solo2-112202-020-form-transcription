@@ -10,6 +10,7 @@ TSV 文件采用 UTF-8，首行为列名。行首 id 是该表的稳定记录号
 - `materials/issue_ledger.tsv`。reference 保留登记方录入的发料号，unit 由登记方独立提供。
 - `materials/physical.tsv`。paper 是已登记单据。state 按实物实际动作记录。
 - `materials/transfer_limits.tsv`。纸单双方共用的计量约定和会计停止自动冲回的条件。
+- `materials/stock_handoffs.tsv`。现场称量和领用回执，时点独立于纸单扫描或销账时间。
 
 ## 运行资料检查
 

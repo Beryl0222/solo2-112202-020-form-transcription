@@ -26,11 +26,22 @@
       "id",
       "authority",
       "text"
+    ],
+    "stock_handoffs.tsv": [
+      "id",
+      "paper",
+      "at",
+      "detail"
     ]
   },
   "references": [
     [
       "physical.tsv",
+      "paper",
+      "scans.tsv"
+    ],
+    [
+      "stock_handoffs.tsv",
       "paper",
       "scans.tsv"
     ]
