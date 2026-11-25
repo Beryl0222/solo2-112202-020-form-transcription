@@ -20,3 +20,25 @@ TSV 文件采用 UTF-8，首行为列名。行首 id 是该表的稳定记录号
 python3 pack_check.py
 python3 -m unittest -v
 ```
+
+## 对账引擎
+
+`reconcile/` 在资料表之上实现字符纠错与对账，全部为标准库、只读输入：
+
+- `textmodel.py`：单号字符（O/0、I/1、L/1）、规格词大小写、计量缩写与标题/表格区域；形状归一化只用于同形聚类，不改账。
+- `parsing.py`：把扫描文本解析成带字段角色的候选；区分逐位候选（`O/0I/1-7`）与整词候选（`OI/01-7`），盒按库管约定换算公斤。
+- `papers.py`：按 fingerprint 聚合纸单，同纸转发不重复入库；复核员的原纸格确认只定向到该纸，不扩散到同形单号。
+- `units.py`：库管/账务约定解析与单位双读法裁决——所有读法通向同一归属和余额才先销账。
+- `engine.py`：同货主同规格域内消歧、容量保护（错录大数量不占其他未决单余额）、合批分法枚举、有关组并查集与整组重算。
+- `physical.py` / `queries.py`：在库与领用回执约束下的冲回、差额待核、双计风险与仓管交接查询。
+
+```sh
+# 全量对账报告：匹配、待查格、有关组、冲回与双计
+python3 -m reconcile.cli
+# 查任一纸单（指纹或扫描 id）还需查什么、实物归哪批
+python3 -m reconcile.cli --paper Fr44
+# 处理外部资料目录（路径作参数，不依赖工作目录）
+python3 -I -c "import sys; sys.path.insert(0, '.'); \
+  from reconcile.cli import main; main(['--directory', '/path/to/materials'])"
+```
+
